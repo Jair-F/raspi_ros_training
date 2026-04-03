@@ -48,9 +48,9 @@ private:
             throw std::runtime_error("GPIO Init Failed");
         }
 
-        int r = softPwmCreate(_led_red_pin, 0, 1000); 
-        int g = softPwmCreate(_led_green_pin, 0, 1000);
-        int b = softPwmCreate(_led_blue_pin, 0, 1000);
+        int r = softPwmCreate(_led_red_pin, 0, 100); 
+        int g = softPwmCreate(_led_green_pin, 0, 100);
+        int b = softPwmCreate(_led_blue_pin, 0, 100);
         if (r != 0 || g != 0 || b != 0) {
             RCLCPP_ERROR(this->get_logger(), "SoftPWM creation failed");
             throw std::runtime_error("PWM Init Failed");
@@ -58,9 +58,9 @@ private:
     }
 
     void _set_led_color(float red, float blue, float green, float alpha) {
-        softPwmWrite(this->_led_red_pin, red * 1000.0 * alpha);
-        softPwmWrite(this->_led_green_pin, green * 1000.0 * alpha);
-        softPwmWrite(this->_led_blue_pin, blue * 1000.0 * alpha);
+        softPwmWrite(this->_led_red_pin, red * 100.0 * alpha);
+        softPwmWrite(this->_led_green_pin, green * 100.0 * alpha);
+        softPwmWrite(this->_led_blue_pin, blue * 100.0 * alpha);
 
         RCLCPP_INFO(this->get_logger(), "WiringPi initialized. LED on Pin %d at 50%% power.", _led_red_pin);
     }
