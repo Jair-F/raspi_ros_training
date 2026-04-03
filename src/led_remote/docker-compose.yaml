@@ -1,6 +1,5 @@
 services:
   app:
-    # image: <your-image-name>
     build:
       context: .
     privileged: true
