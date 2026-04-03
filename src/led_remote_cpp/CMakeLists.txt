@@ -14,7 +14,7 @@ find_library(WIRINGPI_LIBRARY NAMES wiringPi)
 add_executable(remote src/remote.cpp)
 
 target_link_libraries(remote
-  ${WIRINGPI_LIBRARY}
+  wiringPi
   pthread
 )
 
