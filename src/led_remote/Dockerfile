@@ -3,8 +3,6 @@ FROM ros:jazzy-ros-base AS builder
 WORKDIR /workspace
 COPY . .
 
-# RUN apt update && apt upgrade -y
-# RUN apt update && apt install -y python3-rpi.gpio
 RUN ls -la
 RUN colcon build
 
@@ -16,7 +14,7 @@ COPY --from=builder /workspace/install ./install
 
 
 # RUN apt update && apt upgrade -y
-RUN apt update && apt install -y python3-pip python3-rpi.gpio
+RUN apt update && apt install -y python3-pip
 RUN usermod -aG gpio $USER || true
 
 RUN python3 -m pip install --break-system-packages -r requirements.txt
