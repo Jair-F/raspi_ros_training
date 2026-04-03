@@ -7,6 +7,7 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
 
 find_library(WIRINGPI_LIBRARY NAMES wiringPi)
 
@@ -17,7 +18,7 @@ target_link_libraries(remote
   pthread
 )
 
-ament_target_dependencies(remote rclcpp)
+ament_target_dependencies(remote rclcpp std_msgs)
 
 target_include_directories(remote PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
