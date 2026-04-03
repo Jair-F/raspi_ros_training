@@ -10,8 +10,8 @@ class HomeNode(Node):
         self._timer = self.create_timer(1, self._send_color_callback)
     
     def _send_color_callback(self):
-        self.get_logger().info(F"sending color command to LED")
         color = ColorRGBA(r=1., g=1., b=1., a=1.)
+        self.get_logger().info(F"sending color {color} command to LED")
         self._publisher.publish(color)
 
 

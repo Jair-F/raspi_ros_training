@@ -6,4 +6,4 @@ services:
     privileged: true
     network_mode: host
     devices:
-      - "/dev/gpiomem:/dev/gpiomem"
+      - "/dev/gpiomem4:/dev/gpiomem4"

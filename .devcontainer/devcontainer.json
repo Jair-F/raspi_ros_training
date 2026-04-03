@@ -23,5 +23,8 @@
         "QT_X11_NO_MITSHM": "1",
     },
     "postCreateCommand": ".devcontainer/setup_devcontainer.sh",
+    "runArgs": [
+        "--network=host"
+    ],
     // "remoteUser": "root"
 }

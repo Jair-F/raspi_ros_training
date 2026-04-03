@@ -14,7 +14,7 @@ COPY --from=builder /workspace/install ./install
 
 
 # RUN apt update && apt upgrade -y
-RUN apt update && apt install -y python3-pip
+RUN apt update && apt install -y python3-pip python3-lgpio python3-pigpio python3-rpi.gpio
 RUN usermod -aG gpio $USER || true
 
 RUN python3 -m pip install --break-system-packages -r requirements.txt
