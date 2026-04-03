@@ -1,20 +1,26 @@
+import os
+
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg._color_rgba import ColorRGBA
 from flask import Flask, render_template, request
+from ament_index_python.packages import get_package_share_directory
 import threading
 
-app = Flask(__name__)
-selected_color_hex = "#ffffff"
+def get_template_dir() -> str:
+    share_dir = get_package_share_directory(__package__)
+    return os.path.join(share_dir, 'templates')
+
+app = Flask(__name__, template_folder=get_template_dir())
+selected_color_hex = "#000000"
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     global selected_color_hex
     if request.method == 'POST':
-        # Get color from the "selected_color" input field
         selected_color_hex = request.form.get('selected_color')
         print(f"Flask received: {selected_color_hex}")
-        
+
     return render_template('index.html', color=selected_color_hex)
 
 class HomeNode(Node):
@@ -23,7 +29,14 @@ class HomeNode(Node):
         self._publisher = self.create_publisher(ColorRGBA, 'cmd_color', 1)
         self._timer = self.create_timer(1, self._send_color_callback)
 
-        self._flask_thread = threading.Thread(target=lambda: app.run('0.0.0.0', port=1234, debug=False, use_reloader=False), daemon=True)
+        self._start_webserver()
+
+    def _start_webserver(self):
+        self._flask_thread = threading.Thread(
+            target=lambda:
+                app.run('0.0.0.0', port=1234, debug=False, use_reloader=False),
+                daemon=True
+            )
         self._flask_thread.start()
         self.get_logger().info('Started flask thread in background')
 
