@@ -2,9 +2,14 @@ FROM ros:jazzy-ros-base AS builder
 WORKDIR /workspace
 COPY . .
 
+RUN echo ". /opt/ros/jazzy/setup.bash" >> /root/.bashrc
+SHELL ["/bin/bash", "-c"]
+
 RUN apt update
 RUN scripts/setup_env.sh
-RUN ./build.sh
+RUN source /opt/ros/jazzy/setup.bash && \
+    rosdep install --from-paths src -y --ignore-src && \
+    colcon build --symlink-install
 
 
 FROM ros:jazzy-ros-core
