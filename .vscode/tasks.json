@@ -1,0 +1,20 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+        {
+            "type": "colcon",
+            "args": [
+                "build",
+                "--symlink-install",
+            ],
+            "group": "build",
+            "label": "colcon: Colcon Build Release"
+        },
+        {
+            "type": "shell",
+            "command": "rm -rfd build install log ; rm -rfd src/build src/install src/log",
+            "group": "build",
+            "label": "colcon: clean"
+        },
+    ]
+}

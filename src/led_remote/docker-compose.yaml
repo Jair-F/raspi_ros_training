@@ -1,0 +1,9 @@
+services:
+  app:
+    # image: <your-image-name>
+    build:
+      context: .
+    privileged: true
+    network_mode: host
+    devices:
+      - "/dev/gpiomem:/dev/gpiomem"
