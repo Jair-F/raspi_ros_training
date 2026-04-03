@@ -9,14 +9,16 @@ WORKDIR /workspace
 COPY . .
 COPY --from=builder /workspace/install ./install
 
+
 RUN apt update && apt upgrade -y
 RUN apt install -y python3-pip
-RUN scripts/setup_gpio.sh
 
 RUN python3 -m pip install --break-system-packages -r requirements.txt
 
 RUN echo ". /opt/ros/jazzy/setup.bash" >> ~/.bashrc && \
     echo ". install/setup.bash" >> ~/.bashrc
 
+EXPOSE 1234/tcp
+
 ENTRYPOINT ["./entrypoint.sh"]
-CMD ["ros2", "launch", "launch/remote.launch.py"]
+CMD ["ros2", "launch", "launch/home.launch.py"]

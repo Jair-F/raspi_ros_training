@@ -1,5 +1,5 @@
 services:
-  app:
+  led_remote:
     build:
       context: .
     privileged: true
