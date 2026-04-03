@@ -9,7 +9,8 @@ class RemoteNode : public rclcpp::Node {
 public:
     RemoteNode() : Node("remote_node") {
         this->_init_gpio();
-        // this->create_subscription<>("cmd_color")
+        this->create_subscription<std_msgs::msg::ColorRGBA>("cmd_color", 10 ,
+            std::bind(&RemoteNode::topic_callback, this, std::placeholders::_1));
     }
 
     ~RemoteNode() {
@@ -20,6 +21,13 @@ private:
     const int _led_red_pin = 17; // GPIO 17 (BCM numbering)
     const int _led_green_pin = 18;
     const int _led_blue_pin = 19;
+    rclcpp::Subscription<std_msgs::msg::ColorRGBA>::SharedPtr subscription_;
+
+    void topic_callback(const std_msgs::msg::ColorRGBA::SharedPtr msg) {
+        RCLCPP_INFO(this->get_logger(), "Received Color: R:%f, G:%f, B:%f", msg->r, msg->g, msg->b);
+        
+        this->_set_led_color(msg->r, msg->b, msg->g, msg->a);
+    }
 
     void _free_single_gpio(const int _pin) {
         softPwmWrite(_pin, 0);
@@ -52,10 +60,10 @@ private:
         }
     }
 
-    void _set_led_color(float red, float blue, float green) {
-        softPwmWrite(this->_led_red_pin, red * 1000.0);
-        softPwmWrite(this->_led_green_pin, green * 1000.0);
-        softPwmWrite(this->_led_blue_pin, blue * 1000.0);
+    void _set_led_color(float red, float blue, float green, float alpha) {
+        softPwmWrite(this->_led_red_pin, red * 1000.0 * alpha);
+        softPwmWrite(this->_led_green_pin, green * 1000.0 * alpha);
+        softPwmWrite(this->_led_blue_pin, blue * 1000.0 * alpha);
 
         RCLCPP_INFO(this->get_logger(), "WiringPi initialized. LED on Pin %d at 50%% power.", _led_red_pin);
     }
