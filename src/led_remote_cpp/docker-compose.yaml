@@ -1,5 +1,5 @@
 services:
-  led_remote:
+  led_remote_cpp:
     build:
       context: .
     privileged: true

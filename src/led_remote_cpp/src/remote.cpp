@@ -9,7 +9,7 @@ class RemoteNode : public rclcpp::Node {
 public:
     RemoteNode() : Node("remote_node") {
         this->_init_gpio();
-        this->create_subscription<std_msgs::msg::ColorRGBA>("cmd_color", 10 ,
+        this->subscription_ = this->create_subscription<std_msgs::msg::ColorRGBA>("cmd_color", 1 ,
             std::bind(&RemoteNode::topic_callback, this, std::placeholders::_1));
     }
 
