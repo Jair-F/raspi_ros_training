@@ -1,0 +1,8 @@
+services:
+  led_remote:
+    build:
+      context: .
+    privileged: true
+    network_mode: host
+    devices:
+      - "/dev/gpiomem4:/dev/gpiomem4"
