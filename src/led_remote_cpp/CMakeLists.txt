@@ -10,8 +10,16 @@ find_package(ament_cmake REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
+find_library(PIGPIO_LIBRARY NAMES pigpio)
 
 add_executable(remote src/remote.cpp)
+
+target_link_libraries(remote
+  ${PIGPIO_LIBRARY}
+  pthread
+  rt
+)
+
 target_include_directories(remote PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include/${PROJECT_NAME}>)
