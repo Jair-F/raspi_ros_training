@@ -1,0 +1,5 @@
+services:
+  led_home:
+    build:
+      context: .
+    network_mode: host

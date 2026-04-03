@@ -1,9 +1,8 @@
 services:
-  app:
-    # image: <your-image-name>
+  led_remote:
     build:
       context: .
     privileged: true
     network_mode: host
     devices:
-      - "/dev/gpiomem:/dev/gpiomem"
+      - "/dev/gpiomem4:/dev/gpiomem4"

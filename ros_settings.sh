@@ -1,6 +1,6 @@
 
 export ROS_DOMAIN_ID=0
-export ROS_LOCALHOST_ONLY=1
+export ROS_LOCALHOST_ONLY=0
 
 source /opt/ros/jazzy/setup.sh
 
