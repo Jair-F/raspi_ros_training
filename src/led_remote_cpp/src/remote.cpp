@@ -48,13 +48,10 @@ private:
             throw std::runtime_error("GPIO Init Failed");
         }
 
-        // 2. Setup PWM
-        // WiringPi's hardware PWM is limited to specific pins (like 18).
-        // For Pin 17, we use softPwm which works on any GPIO.
-        // softPwmCreate(pin, initial_value, range) -> range 0-100
-        if ((softPwmCreate(this->_led_red_pin, 0, 1000 ==
-             softPwmCreate(this->_led_blue_pin, 0, 1000)) == 
-             (softPwmCreate(this->_led_green_pin, 0, 1000))) != 0) {
+        int r = softPwmCreate(_led_red_pin, 0, 1000); 
+        int g = softPwmCreate(_led_green_pin, 0, 1000);
+        int b = softPwmCreate(_led_blue_pin, 0, 1000);
+        if (r != 0 || g != 0 || b != 0) {
             RCLCPP_ERROR(this->get_logger(), "SoftPWM creation failed");
             throw std::runtime_error("PWM Init Failed");
         }

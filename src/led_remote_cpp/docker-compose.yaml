@@ -6,3 +6,5 @@ services:
     network_mode: host
     devices:
       - "/dev/gpiomem4:/dev/gpiomem4"
+      - "/dev/gpiomem:/dev/gpiomem"
+      - "/dev/mem:/dev/mem"
