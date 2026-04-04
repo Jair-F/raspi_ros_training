@@ -27,7 +27,7 @@ class HomeNode(Node):
     def __init__(self):
         super().__init__("home_node")
         self._publisher = self.create_publisher(ColorRGBA, 'cmd_color', 1)
-        self._timer = self.create_timer(1, self._send_color_callback)
+        self._timer = self.create_timer(0.5, self._send_color_callback)
 
         self._start_webserver()
 
