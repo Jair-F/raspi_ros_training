@@ -18,6 +18,7 @@ public:
     }
 
 private:
+    // GPIO Pins
     const int _led_red_pin = 17;
     const int _led_green_pin = 27;
     const int _led_blue_pin = 22;
