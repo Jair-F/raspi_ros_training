@@ -15,11 +15,11 @@ RUN source /opt/ros/jazzy/setup.bash && \
 FROM ros:jazzy-ros-core
 WORKDIR /workspace
 SHELL ["/bin/bash", "-c"]
+RUN apt update && apt upgrade -y
 
 COPY . .
 COPY --from=builder /workspace/install ./install
 
-RUN apt update && apt upgrade -y
 RUN scripts/setup_env.sh
 
 RUN echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc && \
