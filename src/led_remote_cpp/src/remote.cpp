@@ -18,9 +18,9 @@ public:
     }
 
 private:
-    const int _led_red_pin = 0; // GPIO 17 (BCM numbering)
-    const int _led_green_pin = 2;
-    const int _led_blue_pin = 3;
+    const int _led_red_pin = 17;
+    const int _led_green_pin = 27;
+    const int _led_blue_pin = 22;
     rclcpp::Subscription<std_msgs::msg::ColorRGBA>::SharedPtr subscription_;
 
     void topic_callback(const std_msgs::msg::ColorRGBA::SharedPtr msg) {
