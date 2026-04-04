@@ -62,8 +62,6 @@ private:
         softPwmWrite(this->_led_red_pin, red * 100.0 * alpha);
         softPwmWrite(this->_led_green_pin, green * 100.0 * alpha);
         softPwmWrite(this->_led_blue_pin, blue * 100.0 * alpha);
-
-        RCLCPP_INFO(this->get_logger(), "WiringPi initialized. LED on Pin %d at 50%% power.", _led_red_pin);
     }
 };
 
