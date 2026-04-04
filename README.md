@@ -70,3 +70,6 @@ docker exec -it ros_pi_learn_led-driver_1 /bin/bash -c \
   * **ROS 2 Humble Migration:** Transitioning to `rclcpp` and using the ROS 2 Docker images.
   * **Industrial UI:** Adding a `rosbridge` container to serve a glassmorphism-style web dashboard for real-time control.
   * **Telemetry Integration:** Linking the LED color to system health or network traffic metrics.
+
+
+![Raspberry Pi 3b+ pinout](https://s3.amazonaws.com/youngwonks/Blogs/GPIO_diagram.jpg)
