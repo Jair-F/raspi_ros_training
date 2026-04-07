@@ -17,7 +17,7 @@ COPY --from=builder /workspace/install ./install
 
 RUN python3 -m pip install --break-system-packages -r requirements.txt
 
-RUN echo ". /opt/ros/jazzy/setup.bash" >> ~/.bashrc && \
+RUN echo ". /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc && \
     echo ". install/setup.bash" >> ~/.bashrc
 
 EXPOSE 1234/tcp

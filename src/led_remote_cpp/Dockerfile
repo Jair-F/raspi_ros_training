@@ -2,7 +2,7 @@ FROM ros:jazzy-ros-base AS builder
 WORKDIR /workspace
 COPY . .
 
-RUN echo ". /opt/ros/jazzy/setup.bash" >> /root/.bashrc
+RUN echo ". /opt/ros/$ROS_DISTRO/setup.bash" >> /root/.bashrc
 SHELL ["/bin/bash", "-c"]
 
 RUN apt update
@@ -22,7 +22,7 @@ COPY --from=builder /workspace/install ./install
 
 RUN scripts/setup_env.sh
 
-RUN echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc && \
+RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc && \
     echo "source install/setup.bash" >> ~/.bashrc
 
 ENTRYPOINT ["./entrypoint.sh"]
