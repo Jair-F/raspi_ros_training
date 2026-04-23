@@ -12,6 +12,7 @@ class RemoteNode(Node):
     def _set_color_callback(self, msg:ColorRGBA):
         alpha = msg.a
         self._led.color = (msg.r * alpha, msg.g * alpha, msg.b * alpha)
+        self.get_logger().info(F"Received Color: R:{msg.r}, G:{msg.g}, B:{msg.b}")
 
 def main(args:list[str] | None = None):
     rclpy.init(args=args)
